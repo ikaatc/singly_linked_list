@@ -29,6 +29,21 @@ namespace singly_linked_list
             nim = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("\nMasukan nama Mahasiswa");
             nm = Console.ReadLine();
+
+            Node nodeBaru = new Node();
+            nodeBaru.noMhs = nim;
+            nodeBaru.nama = nm;
+
+            //Node ditambahkan sebagai node pertama
+            if (START == null || nim <= START.noMhs)
+            {
+                if ((START != null) && (nim == START.noMhs))
+                {
+                    Console.WriteLine("\nNomer mahasiswa sama tidak diizinkan");
+                }
+                nodeBaru.next = START;
+
+            }
         }
     }
     internal class Program
