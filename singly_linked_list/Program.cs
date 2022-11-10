@@ -21,7 +21,7 @@ namespace singly_linked_list
         }
         //Method untuk menambahkan sebuah node ke dalam list
 
-        public void addNote()
+        public void addNode()
         {
             int nim;
             string nm;
@@ -92,7 +92,7 @@ namespace singly_linked_list
                 return (true);
         }
         //Method untuk treverse/mengunjungi dan membaca isi list
-        public void treverse()
+        public void traverse()
         {
             if (listEmpty())
                 Console.WriteLine("\nlist kosong: ");
@@ -113,10 +113,88 @@ namespace singly_linked_list
                 return false;
         }
     }
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
+            List obj = new List();
+            while (true)
+            {
+                try
+                {
+                    Console.WriteLine("\nMenu");
+                    Console.WriteLine("1. Menambah data kedalam list");
+                    Console.WriteLine("2. Menghapus data dari dalam list");
+                    Console.WriteLine("3. Melihat semua data didalam list");
+                    Console.WriteLine("4. Mencari sebuah data didalam list");
+                    Console.WriteLine("5. Exit");
+                    Console.Write("\nMasukkan pilihan anda (1-5): ");
+                    char ch = Convert.ToChar(Console.ReadLine());
+                    switch (ch)
+                    {
+                        case '1':
+                            {
+                                obj.addNode();
+                            }
+                            break;
+                        case '2':
+                            {
+                                if (obj.listEmpty())
+                                {
+                                    Console.WriteLine("\nList Kosong");
+                                    break;
+                                }
+                                Console.Write("\nMasukkan nomor mahasiswa yang akan dihapus: ");
+                                int nim = Convert.ToInt32(Console.ReadLine());
+                                Console.WriteLine();
+                                if (obj.delNode(nim) == false)
+                                    Console.WriteLine("\nData tidak ditemukan.");
+                                else
+                                    Console.WriteLine("Data dengan nomor mahasiswa " + nim + " dihapus ");
+                                break;
+                            }
+                        case '3':
+                            {
+                                obj.traverse();
+                                break;
+                            }
+                        case '4':
+                            {
+                                if (obj.listEmpty() == true)
+                                {
+                                    Console.WriteLine("\nList Kosong !");
+                                    break;
+                                }
+                                Node previous, current;
+                                previous = current = null;
+                                Console.Write("\nMasukkan nomor mahasiswa yang akan dicari: ");
+                                int num = Convert.ToInt32(Console.ReadLine());
+                                if (obj.Search(num, ref previous, ref current) == false)
+                                    Console.WriteLine("\nData tidak ditemukan.");
+                                else
+                                {
+                                    Console.WriteLine("\nData ketemu");
+                                    Console.WriteLine("\nNomor Mahasiswa: " + current.noMhs);
+                                    Console.WriteLine("\nNama: " + current.nama);
+                                }
+                            }
+                            break;
+                        case '5':
+                            {
+                                return;
+                            }
+                            default:
+                            {
+                                Console.WriteLine("\nPilihan tidak valid");
+                                break;
+                            }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("\nCheck nilai yang anda masukkan");
+                }
+            }
         }
     }
 }
